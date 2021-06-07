@@ -7,7 +7,7 @@ public class DatabaseService {
     Connection connection;
 
     public DatabaseService(String dbname, String dbuser, String dbpassword) throws SQLException {
-        String url = "jdbc:postgresql://165.227.121.144:5432/" + dbname + "?user=" + dbuser + "&password=" + dbpassword;
+        String url = "jdbc:postgresql://0.0.0.0:5432/" + dbname + "?user=" + dbuser + "&password=" + dbpassword;
         this.connection = DriverManager.getConnection(url);
     }
 

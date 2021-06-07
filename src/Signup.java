@@ -12,8 +12,8 @@ public class Signup extends JFrame implements ActionListener {
     public Signup() {
         try {
             ds = new DatabaseService("slycc", "postgres", "");
-        } catch (SQLException throwables) {
-
+        } catch (SQLException e) {
+            e.printStackTrace();
             return;
         }
         txtName = new JTextField(30);

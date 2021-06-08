@@ -20,7 +20,7 @@ public class Signup extends JFrame implements ActionListener {
         txtName.setToolTipText("Enter Username");
         txtPassword = new JPasswordField(30);
         txtName.setToolTipText("Enter password");
-        btnSave = new JButton("Save");
+        btnSave = new JButton("Register");
         add(txtName);
         add(txtPassword);
         btnSave.addActionListener(this);

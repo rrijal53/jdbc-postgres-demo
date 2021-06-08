@@ -3,7 +3,6 @@ public class User {
     private String address;
     private String gender;
     private String password;
-
     int age;
 
     public User(String name, String address, String gender, String password, int age) {
@@ -14,13 +13,6 @@ public class User {
         this.age = age;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getName() {
         return name;
@@ -44,6 +36,14 @@ public class User {
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getAge() {

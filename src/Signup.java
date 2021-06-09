@@ -5,34 +5,50 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class Signup extends JFrame implements ActionListener {
+    JLabel jlName, jlPassword;
     JTextField txtName;
     JPasswordField txtPassword;
     JButton btnSave;
     DatabaseService ds;
     public Signup() {
-        try {
-            ds = new DatabaseService("slycc", "postgres", "");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return;
-        }
+
         txtName = new JTextField(30);
+        jlName = new JLabel("NAME");
+        jlPassword = new JLabel("PASSWORD");
         txtName.setToolTipText("Enter Username");
         txtPassword = new JPasswordField(30);
         txtName.setToolTipText("Enter password");
         btnSave = new JButton("Register");
+        add(jlName);
         add(txtName);
+        add(jlPassword);
         add(txtPassword);
+        add(btnSave);
         btnSave.addActionListener(this);
         setLayout(new FlowLayout());
-        setSize(400,400);
         setVisible(true);
+        setSize(400,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        User u =  new User(txtName.getText(), "", "", txtPassword.getText(),20 );
-        ds.register(u);
+        try {
+            ds = new DatabaseService("slycc", "postgres", "slycc@2o2o");
+            User u =  new User(txtName.getText(), "", "", txtPassword.getText(),20 );
+            System.out.println("registered....");
+            boolean reg = ds.register(u);
+            if (reg){
+                JOptionPane.showMessageDialog(this, "Registered successfully");
+
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("sql error....");
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Unable to connect to database");
+        }
+
     }
 }

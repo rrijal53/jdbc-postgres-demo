@@ -19,7 +19,6 @@ public class DatabaseService {
     public boolean register(User u) {
         try {
             String s1 = "INSERT INTO TEST(username, password) VALUES('" + u.getName() + "','" + u.getPassword() + "')";
-
             Statement s = this.connection.createStatement();
             int i = s.executeUpdate(s1);
             return i > 0;
@@ -28,6 +27,5 @@ public class DatabaseService {
         }
         return false;
     }
-
 
 }

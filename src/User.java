@@ -1,13 +1,13 @@
 public class User {
     private String name;
-    private String address;
+    private String email;
     private String gender;
     private String password;
     int age;
 
-    public User(String name, String address, String gender, String password, int age) {
+    public User(String name, String email, String gender, String password, int age) {
         this.name = name;
-        this.address = address;
+        this.email = email;
         this.gender = gender;
         this.password = password;
         this.age = age;
@@ -22,12 +22,12 @@ public class User {
         this.name = name;
     }
 
-    public String getAddress() {
-        return address;
+    public String getEmail() {
+        return email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getGender() {

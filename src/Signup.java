@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class Signup extends JFrame implements ActionListener {
-    JLabel jlName, jlPassword;
-    JTextField txtName;
+    JLabel jlName, jlPassword, jlEmail;
+    JTextField txtName, txtEmail;
     JPasswordField txtPassword;
     JButton btnSave;
     DatabaseService ds;
@@ -16,11 +16,15 @@ public class Signup extends JFrame implements ActionListener {
         jlName = new JLabel("NAME");
         jlPassword = new JLabel("PASSWORD");
         txtName.setToolTipText("Enter Username");
+        jlEmail = new JLabel("Email");
+        txtEmail = new JTextField(20);
         txtPassword = new JPasswordField(30);
         txtName.setToolTipText("Enter password");
         btnSave = new JButton("Register");
         add(jlName);
         add(txtName);
+        add(jlEmail);
+        add(txtEmail);
         add(jlPassword);
         add(txtPassword);
         add(btnSave);
@@ -36,7 +40,7 @@ public class Signup extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         try {
             ds = new DatabaseService("slycc", "postgres", "slycc@2o2o");
-            User u =  new User(txtName.getText(), "", "", txtPassword.getText(),20 );
+            User u =  new User(txtName.getText(), txtEmail.getText(), "", txtPassword.getText(),20 );
             System.out.println("registered....");
             boolean reg = ds.register(u);
             if (reg){

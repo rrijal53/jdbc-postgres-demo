@@ -1,7 +1,7 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import pojo.*;
+
+import java.sql.*;
+import java.util.*;
 
 //connection
 //statement
@@ -28,4 +28,61 @@ public class DatabaseService {
         return false;
     }
 
+    public User login(String userName, String password) {
+        User u = null;
+        try {
+            PreparedStatement stmt = this.connection.prepareStatement("select * from TEST where username=? and password=?");
+            stmt.setString(1, userName);
+            stmt.setString(2, password);
+            ResultSet r = stmt.executeQuery();
+
+            while (r.next()) {
+                u = new User(r.getString("username"), r.getString("email"), "", "", 1);
+                break;
+            }
+
+            return u;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return u;
+    }
+
+
+    public List<Category> getCategories() {
+        String query = "SELECT * FROM categories";
+        List<Category> categoryList = new ArrayList<>();
+
+        try {
+            Statement s = this.connection.createStatement();
+            ResultSet resultSet = s.executeQuery(query);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("category");
+                String image = resultSet.getString("image");
+                Category category = new Category(id, name, image);
+                categoryList.add(category);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return categoryList;
+    }
+
+    public boolean insertProduct(Product p) {
+        String ps = "INSERT INTO PRODUCT VALUES(?,?,?,?)";
+        //  String ps="INSERT INTO PRODUCT VALUES(" +p.getId() +",'" +p.getName()+ "',?,?)";
+        try {
+            PreparedStatement preparedStatement = this.connection.prepareStatement(ps);
+            preparedStatement.setInt(1, p.getId());
+            preparedStatement.setString(2, p.getName());
+            preparedStatement.setDouble(3, p.getPrice());
+            preparedStatement.setString(4, p.getDescription());
+            return preparedStatement.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
+    }
 }
